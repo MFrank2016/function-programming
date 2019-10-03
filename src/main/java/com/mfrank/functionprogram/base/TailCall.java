@@ -8,13 +8,14 @@ public abstract class TailCall<T> {
 
     public abstract boolean isSuspend();
 
-    private TailCall(){}
+    private TailCall() {
+    }
 
     private static class Return<T> extends TailCall<T> {
 
         private final T t;
 
-        private Return(T t){
+        private Return(T t) {
             this.t = t;
         }
 
@@ -52,7 +53,7 @@ public abstract class TailCall<T> {
         @Override
         public T eval() {
             TailCall<T> tailRec = this;
-            while (tailRec.isSuspend()){
+            while (tailRec.isSuspend()) {
                 tailRec = tailRec.resume();
             }
             return tailRec.eval();
@@ -64,11 +65,11 @@ public abstract class TailCall<T> {
         }
     }
 
-    public static <T> Return<T> ret(T t){
+    public static <T> Return<T> ret(T t) {
         return new Return<>(t);
     }
 
-    public static <T> Suspend<T> sus(Supplier<TailCall<T>> s){
+    public static <T> Suspend<T> sus(Supplier<TailCall<T>> s) {
         return new Suspend<>(s);
     }
 }

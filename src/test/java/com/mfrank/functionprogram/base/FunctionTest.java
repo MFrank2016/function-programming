@@ -6,9 +6,12 @@ import java.math.BigInteger;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import static com.mfrank.functionprogram.base.Case.*;
-import static com.mfrank.functionprogram.base.Result.*;
-import static com.mfrank.functionprogram.base.TailCall.*;
+import static com.mfrank.functionprogram.base.Case.match;
+import static com.mfrank.functionprogram.base.Case.mcase;
+import static com.mfrank.functionprogram.base.Result.failure;
+import static com.mfrank.functionprogram.base.Result.success;
+import static com.mfrank.functionprogram.base.TailCall.ret;
+import static com.mfrank.functionprogram.base.TailCall.sus;
 import static com.mfrank.functionprogram.util.CollectionUtility.*;
 
 public class FunctionTest {
@@ -150,11 +153,11 @@ public class FunctionTest {
     }
 
 
-    public static String addSI(String s, Integer i){
+    public static String addSI(String s, Integer i) {
         return "(" + s + " + " + i + ")";
     }
 
-    public static String addIS(Integer i, String s){
+    public static String addIS(Integer i, String s) {
         return "(" + i + " + " + s + ")";
     }
 
