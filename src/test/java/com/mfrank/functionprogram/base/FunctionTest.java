@@ -173,4 +173,6 @@ public class FunctionTest {
         String s2 = foldRight(list, identity, f2);
         System.out.println(s2);
     }
+
+
 }

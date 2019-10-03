@@ -1,5 +1,9 @@
 package com.mfrank.functionprogram.base;
 
+import java.util.List;
+
+import static com.mfrank.functionprogram.util.CollectionUtility.*;
+
 public interface Function<T, U> {
 
     U apply(T arg);
@@ -47,4 +51,21 @@ public interface Function<T, U> {
     static <T, U, V> Function<T, V> partialU(U u, Function<T, Function<U, V>> f) {
         return a -> f.apply(a).apply(u);
     }
+
+    static <T> Function<T, T> composeAllViaFoldLeft(List<Function<T, T>> list){
+        return x -> foldLeft(reverse(list), x, a -> b -> b.apply(a));
+    }
+
+    static <T> Function<T, T> composeAllViaFoldRight(List<Function<T, T>> list){
+        return x -> foldRight(list, x, a -> a::apply);
+    }
+
+    static <T> Function<T, T> andThenAllViaFoldLeft(List<Function<T, T>> list){
+        return x -> foldLeft(list, x, a -> b -> b.apply(a));
+    }
+
+    static <T> Function<T, T> andThenAllViaFoldRight(List<Function<T, T>> list){
+        return x -> foldRight(reverse(list), x, a -> a::apply);
+    }
+
 }
