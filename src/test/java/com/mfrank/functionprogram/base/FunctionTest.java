@@ -18,13 +18,23 @@ public class FunctionTest {
 
     @Test
     public void addFuntion() {
+        Integer arg1 = 3;
+        Integer arg2 = 7;
         Function<Integer, Function<Integer, Integer>> add = x -> y -> x + y;
-        Integer result = add.apply(2).apply(3);
-        System.out.println(result);
+        Integer result = add.apply(arg1).apply(arg2);
+        assert result.equals(arg1 + arg2);
 
-        BinaryOperator<Integer> add1 = x -> y -> x + y;
-        Integer result1 = add1.apply(2).apply(5);
-        System.out.println(result1);
+        BinaryOperator<Integer> addFunction = getAddFunction();
+        Integer result1 = execBiFunction(addFunction, arg1, arg2 * 2);
+        assert result1.equals(arg1 + arg2 * 2);
+    }
+
+    private BinaryOperator<Integer> getAddFunction(){
+        return x -> y -> x + y;
+    }
+
+    private <T> T execBiFunction(BinaryOperator<T> func, T arg1, T arg2){
+        return func.apply(arg1).apply(arg2);
     }
 
     @Test
