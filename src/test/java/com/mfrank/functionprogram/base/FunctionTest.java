@@ -27,6 +27,14 @@ public class FunctionTest {
         BinaryOperator<Integer> addFunction = getAddFunction();
         Integer result1 = execBiFunction(addFunction, arg1, arg2 * 2);
         assert result1.equals(arg1 + arg2 * 2);
+
+        Integer result2 = addFunc(arg1, arg2);
+        assert result2.equals(arg1 + arg2);
+    }
+
+    private int addFunc(int i, int j){
+        System.out.println("入参为：" + i + "," + j);
+        return i + j;
     }
 
     private BinaryOperator<Integer> getAddFunction(){
